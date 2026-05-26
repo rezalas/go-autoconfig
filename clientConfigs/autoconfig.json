@@ -1,0 +1,20 @@
+{
+    "vendor": "Mozilla",
+    "templateFile": "/templates/autoconfig.xml.tmpl",
+    "supportedEndpoints": [
+        "/mail/config-v1.1.xml"
+    ],
+    "vars": {
+        "DISPLAY_NAME": "Mail",
+        "IMAP_HOSTNAME": "mail.example.com",
+        "IMAP_PORT": "993",
+        "IMAP_SOCKET": "SSL",
+        "SMTP_HOSTNAME": "mail.example.com",
+        "SMTP_PORT": "587",
+        "SMTP_SOCKET": "STARTTLS",
+        "DAV_HOSTNAME": "mail.example.com",
+        "DAV_PORT": "443",
+        "CALDAV_PATH": "/dav.php/calendars/%EMAILADDRESS%/default",
+        "CARDDAV_PATH": "/dav.php/addressbooks/%EMAILADDRESS%/default"
+    }
+}

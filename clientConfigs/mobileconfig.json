@@ -1,0 +1,15 @@
+{
+    "vendor": "Apple",
+    "templateFile": "/templates/mobileconfig.xml.tmpl",
+    "supportedEndpoints": [
+        "/mobileconfig"
+    ],
+    "vars": {
+        "DISPLAY_NAME": "Mail",
+        "DESCRIPTION": "Email account configuration",
+        "IMAP_HOSTNAME": "mail.example.com",
+        "IMAP_PORT": "993",
+        "SMTP_HOSTNAME": "mail.example.com",
+        "SMTP_PORT": "587"
+    }
+}

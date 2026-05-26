@@ -1,0 +1,36 @@
+<clientConfig version="1.1">
+<emailProvider id="{{.Domain}}">
+<domain>{{.Domain}}</domain>
+<displayName>{{.Vars.DISPLAY_NAME}}</displayName>
+<incomingServer type="imap">
+<hostname>{{.Vars.IMAP_HOSTNAME}}</hostname>
+<port>{{.Vars.IMAP_PORT}}</port>
+<socketType>{{.Vars.IMAP_SOCKET}}</socketType>
+<authentication>password-cleartext</authentication>
+<username>%EMAILADDRESS%</username>
+</incomingServer>
+<outgoingServer type="smtp">
+<hostname>{{.Vars.SMTP_HOSTNAME}}</hostname>
+<port>{{.Vars.SMTP_PORT}}</port>
+<socketType>{{.Vars.SMTP_SOCKET}}</socketType>
+<authentication>password-cleartext</authentication>
+<username>%EMAILADDRESS%</username>
+</outgoingServer>
+<incomingServer type="caldav">
+<hostname>{{.Vars.DAV_HOSTNAME}}</hostname>
+<port>{{.Vars.DAV_PORT}}</port>
+<socketType>SSL</socketType>
+<authentication>password-cleartext</authentication>
+<username>%EMAILADDRESS%</username>
+<path>{{.Vars.CALDAV_PATH}}</path>
+</incomingServer>
+<incomingServer type="carddav">
+<hostname>{{.Vars.DAV_HOSTNAME}}</hostname>
+<port>{{.Vars.DAV_PORT}}</port>
+<socketType>SSL</socketType>
+<authentication>password-cleartext</authentication>
+<username>%EMAILADDRESS%</username>
+<path>{{.Vars.CARDDAV_PATH}}</path>
+</incomingServer>
+</emailProvider>
+</clientConfig>

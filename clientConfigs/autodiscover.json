@@ -1,0 +1,14 @@
+{
+    "vendor": "Microsoft",
+    "templateFile": "/templates/autodiscover.xml.tmpl",
+    "supportedEndpoints": [
+        "/autodiscover/autodiscover.xml"
+    ],
+    "vars": {
+        "DISPLAY_NAME": "Mail",
+        "IMAP_HOSTNAME": "mail.example.com",
+        "IMAP_PORT": "993",
+        "SMTP_HOSTNAME": "mail.example.com",
+        "SMTP_PORT": "587"
+    }
+}
