@@ -40,7 +40,7 @@ func Load() (*Config, error) {
 	// --- Domains ---
 	raw := os.Getenv("SUPPORTED_DOMAINS")
 	if raw != "" {
-		for _, d := range strings.Split(raw, ",") {
+		for d := range strings.SplitSeq(raw, ",") {
 			d = strings.TrimSpace(d)
 			if d != "" {
 				cfg.SupportedDomains = append(cfg.SupportedDomains, strings.ToLower(d))
