@@ -23,7 +23,6 @@ type Config struct {
 	DBUser       string
 	DBPassword   string
 	QueryDomains string
-	QueryUsers   string
 
 	// Listening address
 	ListenAddr string
@@ -80,20 +79,13 @@ func Load() (*Config, error) {
 			return nil, fmt.Errorf("DBUSER is required when ISDBENABLED=true")
 		}
 
-		// Validate queries contain at least one placeholder
+		// Validate query contains at least one placeholder
 		cfg.QueryDomains = os.Getenv("QUERY_DOMAINS")
-		cfg.QueryUsers = os.Getenv("QUERY_USERS")
 
 		if cfg.QueryDomains == "" {
 			return nil, fmt.Errorf("QUERY_DOMAINS is required when ISDBENABLED=true")
 		}
-		if cfg.QueryUsers == "" {
-			return nil, fmt.Errorf("QUERY_USERS is required when ISDBENABLED=true")
-		}
 		if err := validatePlaceholders(cfg.DBDriver, "QUERY_DOMAINS", cfg.QueryDomains); err != nil {
-			return nil, err
-		}
-		if err := validatePlaceholders(cfg.DBDriver, "QUERY_USERS", cfg.QueryUsers); err != nil {
 			return nil, err
 		}
 	}

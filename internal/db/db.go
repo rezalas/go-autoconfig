@@ -12,12 +12,11 @@ import (
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
-// DB wraps a *sql.DB and exposes domain/user lookup methods using
+// DB wraps a *sql.DB and exposes domain lookup methods using
 // caller-supplied prepared statement templates from Config.
 type DB struct {
 	conn         *sql.DB
 	queryDomains string
-	queryUsers   string
 }
 
 // Open creates and validates a new DB connection based on cfg.
@@ -48,7 +47,6 @@ func Open(cfg *config.Config) (*DB, error) {
 	return &DB{
 		conn:         conn,
 		queryDomains: cfg.QueryDomains,
-		queryUsers:   cfg.QueryUsers,
 	}, nil
 }
 
@@ -68,21 +66,6 @@ func (d *DB) DomainExists(ctx context.Context, domain string) (bool, error) {
 	}
 	if err != nil {
 		return false, fmt.Errorf("querying domains: %w", err)
-	}
-	return true, nil
-}
-
-// UserExists returns true if the given email address is found by QueryUsers.
-// The email value is bound as a parameter — never interpolated into the query.
-func (d *DB) UserExists(ctx context.Context, email string) (bool, error) {
-	row := d.conn.QueryRowContext(ctx, d.queryUsers, email)
-	var found string
-	err := row.Scan(&found)
-	if err == sql.ErrNoRows {
-		return false, nil
-	}
-	if err != nil {
-		return false, fmt.Errorf("querying users: %w", err)
 	}
 	return true, nil
 }
