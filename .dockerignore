@@ -1,0 +1,17 @@
+.git
+.gitignore
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+*.log
+vendor/
+dist/
+build/
+.env
+.env.local
+.github
+README.md
+LICENSE

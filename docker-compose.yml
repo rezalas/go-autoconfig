@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  autoconfig:
+    build: .
+    container_name: autoconfig
+    ports:
+      - "8080:8080"
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      # Optional: mount config directories for easier management
+      - ./clientConfigs:/app/clientConfigs:ro
+      - ./templates:/app/templates:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: example database service for domain/user validation
+  # postgres:
+  #   image: postgres:17-alpine
+  #   container_name: autoconfig-db
+  #   environment:
+  #     POSTGRES_DB: mailserver
+  #     POSTGRES_USER: mail_user
+  #     POSTGRES_PASSWORD: secure_password_here
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:

@@ -8,7 +8,6 @@ import (
 // DomainChecker is satisfied by both the DB-backed checker and the env-var checker.
 type DomainChecker interface {
 	DomainExists(ctx context.Context, domain string) (bool, error)
-	UserExists(ctx context.Context, email string) (bool, error)
 }
 
 // EnvChecker validates domains against a static allow-list loaded from
@@ -30,10 +29,4 @@ func NewEnvChecker(domains []string) *EnvChecker {
 func (e *EnvChecker) DomainExists(_ context.Context, domain string) (bool, error) {
 	_, ok := e.domains[strings.ToLower(domain)]
 	return ok, nil
-}
-
-// UserExists always returns true in env-var mode — individual users are not
-// enumerated, only the domain is checked.
-func (e *EnvChecker) UserExists(_ context.Context, _ string) (bool, error) {
-	return true, nil
 }
