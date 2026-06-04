@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
+	"os"
 	"path/filepath"
-	"runtime"
 
 	"github.com/gin-gonic/gin"
 
@@ -71,9 +71,9 @@ func main() {
 // execDir returns the directory containing the running executable, falling
 // back to the current directory if it cannot be determined.
 func execDir() string {
-	_, filename, _, ok := runtime.Caller(0)
-	if !ok {
+	ex, err := os.Executable()
+	if err != nil {
 		return "."
 	}
-	return filepath.Dir(filename)
+	return filepath.Dir(ex)
 }

@@ -29,7 +29,9 @@ func RegisterRoutes(r *gin.Engine, configs []*loader.ClientConfig, registry load
 	h := New(registry, checker)
 
 	for _, cfg := range configs {
+		cfg := cfg
 		for _, endpoint := range cfg.SupportedEndpoints {
+			endpoint := endpoint
 
 			// Autodiscover uses POST; everything else uses GET.
 			method := http.MethodGet

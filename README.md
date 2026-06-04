@@ -285,6 +285,32 @@ server {
 }
 ```
 
+### Apache Reverse Proxy
+
+```apache
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName mail.example.com
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # Enable required modules: a2enmod proxy, a2enmod proxy_http, a2enmod rewrite
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+</VirtualHost>
+```
+
+**Note**: Ensure the following Apache modules are enabled:
+```bash
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod rewrite
+sudo systemctl reload apache2
+```
+
 ## Development
 
 ### Project Structure
